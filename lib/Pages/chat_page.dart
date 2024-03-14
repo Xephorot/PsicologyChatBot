@@ -27,17 +27,17 @@ class _ChatPageState extends State<ChatPage> {
 
   // Definición del usuario actual
   final ChatUser _currentUser =
-      ChatUser(id: '1', firstName: 'Hussain', lastName: 'Mustafa');
+      ChatUser(id: '1', firstName: 'Sergio', lastName: 'Escalante');
 
   // Definición del usuario del chat GPT
   final ChatUser _gptChatUser =
-      ChatUser(id: '2', firstName: 'Chat', lastName: 'GPT');
+      ChatUser(id: '2', firstName: 'Elver', lastName: 'Galarga');
 
   // Lista de mensajes en el chat
-  List<ChatMessage> _messages = <ChatMessage>[];
+  final List<ChatMessage> _messages = <ChatMessage>[];
 
   // Lista de usuarios que están escribiendo
-  List<ChatUser> _typingUsers = <ChatUser>[];
+  final List<ChatUser> _typingUsers = <ChatUser>[];
 
   @override
   // Construcción de la interfaz de la página de chat
@@ -45,13 +45,13 @@ class _ChatPageState extends State<ChatPage> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: const Color.fromRGBO(
+          139,
           0,
-          166,
-          126,
+          0,
           1,
         ),
         title: const Text(
-          'GPT Chat',
+          'Anti Estress Bot',
           style: TextStyle(
             color: Colors.white,
           ),
@@ -63,9 +63,9 @@ class _ChatPageState extends State<ChatPage> {
           messageOptions: const MessageOptions(
             currentUserContainerColor: Colors.black,
             containerColor: Color.fromRGBO(
+              139,
               0,
-              166,
-              126,
+              0,
               1,
             ),
             textColor: Colors.white,
@@ -96,7 +96,8 @@ class _ChatPageState extends State<ChatPage> {
     final request = ChatCompleteText(
       model: GptTurbo0301ChatModel(),
       messages: _messagesHistory.map((m) => m.toJson()).toList(),
-      maxToken: 200,
+      //Maximo de tokens (Caracteres permitidos en la respuesta)
+      maxToken: 150,
     );
     // Obtener la respuesta de la API de OpenAI
     final response = await _openAI.onChatCompletion(request: request);
