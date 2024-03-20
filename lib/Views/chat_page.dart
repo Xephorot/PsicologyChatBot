@@ -1,20 +1,18 @@
 import 'package:chat_gpt_sdk/chat_gpt_sdk.dart';
+import 'package:chatbot_psicologia/Views/MenuLateral.dart';
 import 'package:chatbot_psicologia/consts.dart';
 import 'package:dash_chat_2/dash_chat_2.dart';
 import 'package:flutter/material.dart';
 
-// Definición de la página de chat como un StatefulWidget
 class ChatPage extends StatefulWidget {
   const ChatPage({super.key});
 
   @override
-  // Creación del estado de la página de chat
   State<ChatPage> createState() => _ChatPageState();
 }
 
-// Definición del estado de la página de chat
+//TODO: Limpiar Codigo, Implementar MVC y Builder.
 class _ChatPageState extends State<ChatPage> {
-  // Creación de una instancia de OpenAI con la clave de API y opciones de configuración
   final _openAI = OpenAI.instance.build(
     token: OPENAI_API_KEY,
     baseOption: HttpSetup(
@@ -24,23 +22,18 @@ class _ChatPageState extends State<ChatPage> {
     ),
     enableLog: true,
   );
-
-  // Definición del usuario actual
+  
   final ChatUser _currentUser =
       ChatUser(id: '1', firstName: 'Sergio', lastName: 'Escalante');
 
-  // Definición del usuario del chat GPT
   final ChatUser _gptChatUser =
       ChatUser(id: '2', firstName: 'Elver', lastName: 'Galarga');
 
-  // Lista de mensajes en el chat
   final List<ChatMessage> _messages = <ChatMessage>[];
 
-  // Lista de usuarios que están escribiendo
   final List<ChatUser> _typingUsers = <ChatUser>[];
 
   @override
-  // Construcción de la interfaz de la página de chat
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
@@ -56,7 +49,9 @@ class _ChatPageState extends State<ChatPage> {
             color: Colors.white,
           ),
         ),
+        iconTheme: const IconThemeData(color: Colors.white), // Color del icono del menu lateral
       ),
+      drawer: const MenuLateral(), //Integracion del menu lateral
       body: DashChat(
           currentUser: _currentUser,
           typingUsers: _typingUsers,
@@ -73,33 +68,33 @@ class _ChatPageState extends State<ChatPage> {
           onSend: (ChatMessage m) {
             getChatResponse(m);
           },
+          // Aquí se establece el historial de mensajes
           messages: _messages),
     );
   }
 
-  // Función para obtener la respuesta del chat a partir de un mensaje
+  //Aqui se obtiene la respuesta del chat
   Future<void> getChatResponse(ChatMessage m) async {
     setState(() {
-      // Insertar el mensaje en la lista de mensajes y añadir el usuario GPT a la lista de usuarios que están escribiendo
       _messages.insert(0, m);
       _typingUsers.add(_gptChatUser);
     });
-    // Crear el historial de mensajes
-    List<Messages> _messagesHistory = _messages.reversed.map((m) {
+
+    // Obtener el historial de mensajes
+    List<Messages> messagesHistory = _messages.reversed.map((m) {
       if (m.user == _currentUser) {
         return Messages(role: Role.user, content: m.text);
       } else {
         return Messages(role: Role.assistant, content: m.text);
       }
     }).toList();
-    // Crear la solicitud de completado de chat
+    // Crear la solicitud para obtener la respuesta del chat
     final request = ChatCompleteText(
       model: GptTurbo0301ChatModel(),
-      messages: _messagesHistory.map((m) => m.toJson()).toList(),
-      //Maximo de tokens (Caracteres permitidos en la respuesta)
+      messages: messagesHistory.map((m) => m.toJson()).toList(),
       maxToken: 150,
     );
-    // Obtener la respuesta de la API de OpenAI
+
     final response = await _openAI.onChatCompletion(request: request);
     for (var element in response!.choices) {
       if (element.message != null) {
