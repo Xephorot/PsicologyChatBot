@@ -1,4 +1,4 @@
-import 'package:chatbot_psicologia/Views/chat_page.dart';
+import 'package:chatbot_psicologia/Views/ChatPage.dart';
 import 'package:flutter/material.dart';
 
 void main() {
