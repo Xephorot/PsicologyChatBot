@@ -33,11 +33,11 @@ class _ChatPageState extends State<ChatPage> {
         onSend: (ChatMessage m) {
           getChatResponse(m, () {
             setState(
-                () {}); // Esto forzará a reconstruir el widget y actualizar la UI
+                () {});
           });
         },
         messages: ChatMessageModel
-            .messages, // Asegúrate de pasar la lista completa aquí
+            .messages, 
       ),
     );
   }
