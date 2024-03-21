@@ -19,7 +19,7 @@ Future<void> getChatResponse(ChatMessage message, Function() updateStateCallback
   final request = ChatCompleteText(
     model: GptTurbo0301ChatModel(),
     messages: messagesHistory.map((m) => m.toJson()).toList(),
-    maxToken: 150,
+    maxToken: 100,
   );
 
   final response = await OpenAIClient.openAI.onChatCompletion(request: request);
