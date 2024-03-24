@@ -1,5 +1,4 @@
 import 'package:chatbot_psicologia/Controllers/restartchat.dart';
-import 'package:chatbot_psicologia/Models/ChatUserModel.dart';
 import 'package:flutter/material.dart';
 
 //TODO: Limpiar Codigo, Implementar MVC y Builder.
@@ -40,9 +39,6 @@ class MenuLateral extends StatelessWidget{
             title: const Text('Nuevo Chat'),
             onTap: () {
               restartChat(() {});
-              ChatMessageModel.messages.clear();
-              ChatMessageModel.typingUsers.clear();
-
               //TODO: Implementar logica de nuevo chat.
               Navigator.of(context).pop(); // Cierra el menú
             },
