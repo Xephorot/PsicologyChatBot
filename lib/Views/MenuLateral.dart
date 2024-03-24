@@ -40,6 +40,7 @@ class MenuLateral extends StatelessWidget{
             onTap: () {
               restartChat(() {});
               //TODO: Implementar logica de nuevo chat.
+              Navigator.pushReplacementNamed(context, '/chatScreen');
               Navigator.of(context).pop(); // Cierra el menú
             },
           ),
