@@ -21,7 +21,7 @@ Future<void> getChatResponse(ChatMessage message, Function() updateStateCallback
     messages: messagesHistory.map((m) => m.toJson()).toList(),
     maxToken: 100,
   );
-
+  
   final response = await OpenAIClient.openAI.onChatCompletion(request: request);
   if (response != null && response.choices.isNotEmpty) {
     for (var element in response.choices) {
