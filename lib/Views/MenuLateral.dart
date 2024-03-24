@@ -27,6 +27,14 @@ class MenuLateral extends StatelessWidget {
             
           ),
           ListTile(
+            leading: const Icon(Icons.chat),
+            title: const Text('Iniciar Test'),
+            onTap: () {
+              //TODO: Implementar logica de ver inciar el test y ver los demas chat hechos.
+              Navigator.of(context).pop(); // Cierra el menú
+            },
+          ),
+          ListTile(
             leading: const Icon(Icons.plus_one),
             title: const Text('Nuevo Chat'),
             onTap: () {
