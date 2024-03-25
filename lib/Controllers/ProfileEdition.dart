@@ -38,7 +38,6 @@ class ProfileEditor {
   void saveProfile(String newUsername) async {
     _profile.username = newUsername;
     profileNotifier.value = Profile(newUsername);
-    //print('Perfil guardado: ${_profile.username}');
     final prefs = await SharedPreferences.getInstance();
     await prefs.setString('username', newUsername);
   }
@@ -50,7 +49,6 @@ class ProfileEditor {
     profileNotifier.value = _profile;
   }
 }
-
 
 class ProfileEditDialog extends StatelessWidget {
   final Profile profile;
