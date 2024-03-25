@@ -44,6 +44,7 @@ class MenuLateral extends StatelessWidget {
             leading: const Icon(Icons.plus_one),
             title: const Text('Nuevo Chat'),
             onTap: () {
+              //! Por alguna razon no funca ahora, pero antes si, arreglar
               restartChat(() {});
               Navigator.of(context).pop();
             },
