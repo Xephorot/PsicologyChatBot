@@ -1,5 +1,6 @@
 import 'package:chatbot_psicologia/Controllers/Chat/ChatManagement.dart';
 import 'package:chatbot_psicologia/Controllers/Chat/ChatOperations.dart';
+import 'package:chatbot_psicologia/Views/ChatPage.dart';
 import 'package:flutter/material.dart';
 
 class ChatController {
@@ -7,11 +8,20 @@ class ChatController {
   final ChatOperations _chatOperations = ChatOperations();
   final ChatManagement _chatManagement = ChatManagement();
 
-  ChatController._internal();
+   ChatController._internal();
 
   Future<void> restartAndSaveChat(BuildContext context) async {
-    await _chatOperations.restartAndSaveChat(context);
-    Navigator.of(context).pop();
+    await _chatOperations.restartAndSaveChat(context, () {
+      Navigator.of(context).pop();
+      _restartUI(context);
+    });
+  }
+
+  void _restartUI(BuildContext context) {
+    Navigator.of(context).pushAndRemoveUntil(
+      MaterialPageRoute(builder: (context) => const ChatPage()),
+      (Route<dynamic> route) => false,
+    );
   }
 
   void startTest(BuildContext context) {
