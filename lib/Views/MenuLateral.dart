@@ -1,30 +1,36 @@
+import 'package:chatbot_psicologia/Controllers/ProfileEdition.dart';
 import 'package:chatbot_psicologia/Controllers/restartchat.dart';
 import 'package:flutter/material.dart';
+
 //TODO: Limpiar Codigo, Implementar MVC y Builder.
-class MenuLateral extends StatelessWidget{
+class MenuLateral extends StatelessWidget {
   const MenuLateral({super.key});
-  
   @override
   Widget build(BuildContext context) {
     return Drawer(
       child: ListView(
         padding: EdgeInsets.zero,
         children: <Widget>[
-          GestureDetector(
-            onTap: () {
-              //TODO: Implementar la lógica para editar el nombre y apellido del usuario y foto de perfil
-              Navigator.of(context).pop(); // Cierra el menú
+          //*Este es el perfil de usuario
+          ValueListenableBuilder(
+            valueListenable: ProfileEditor.instance.profileNotifier,
+            builder: (context, Profile profile, child) {
+              return GestureDetector(
+                onTap: () {
+                  ProfileEditor.instance.editProfile(context);
+                },
+                child: UserAccountsDrawerHeader(
+                  accountName: Text(profile.username),
+                  accountEmail: const Text(""),
+                  currentAccountPicture: const CircleAvatar(
+                    child: FlutterLogo(size: 45.0),
+                  ),
+                  decoration: const BoxDecoration(
+                    color: Color.fromRGBO(139, 0, 0, 1),
+                  ),
+                ),
+              );
             },
-            child: const UserAccountsDrawerHeader(
-              accountName: Text("Nombre y Apellido del Usuario"),
-              accountEmail: Text(""),
-              currentAccountPicture: CircleAvatar(
-                child: FlutterLogo(size: 45.0),
-              ),
-              decoration: BoxDecoration(
-                color: Color.fromRGBO(139, 0, 0, 1),
-              ),
-            ),
           ),
           ListTile(
             leading: const Icon(Icons.chat),

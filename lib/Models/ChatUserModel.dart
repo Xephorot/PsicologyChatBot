@@ -5,7 +5,7 @@ class ChatUserModel {
   //Usuario Principal
   static final ChatUser currentUser = ChatUser(id: '1', firstName: 'Sergio', lastName: 'Escalante');
   //Usuario de OpenAI
-  static final ChatUser gptChatUser = ChatUser(id: '2', firstName: 'Elver', lastName: 'Galarga');
+  static final ChatUser gptChatUser = ChatUser(id: '2', firstName: 'Stress', lastName: 'Bot');
 }
 
 // Definición de los mensajes del chat.
