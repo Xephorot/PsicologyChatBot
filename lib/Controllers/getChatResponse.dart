@@ -28,7 +28,7 @@ Future<void> getChatResponse(
       },
       ...messagesHistory.map((m) => m.toJson()).toList()
     ],
-    maxToken: 100,
+    maxToken: 150,
     temperature: 0.7,
   );
   
