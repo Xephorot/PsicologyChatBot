@@ -1,18 +1,8 @@
 import 'package:chatbot_psicologia/Controllers/restartchat.dart';
 import 'package:flutter/material.dart';
-
 //TODO: Limpiar Codigo, Implementar MVC y Builder.
 class MenuLateral extends StatelessWidget{
   const MenuLateral({super.key});
-  void _handleNewChat(BuildContext context) {
-    // Llama a restartChat para limpiar el estado del chat
-    restartChat(() {
-      // Aquí, implementa la lógica para refrescar la UI. Esta implementación depende de tu estructura de aplicación.
-
-      Navigator.pop(context); // Cierra el Drawer
-      Navigator.pushReplacementNamed(context, '/chatScreen'); // Refresca la pantalla de chats
-    });
-  }
   
   @override
   Widget build(BuildContext context) {
@@ -48,10 +38,8 @@ class MenuLateral extends StatelessWidget{
             leading: const Icon(Icons.plus_one),
             title: const Text('Nuevo Chat'),
             onTap: () {
-              _handleNewChat(context);
               restartChat(() {});
-              //TODO: Implementar logica de nuevo chat.
-              Navigator.of(context).pop(); // Cierra el menú
+              Navigator.of(context).pop();
             },
           ),
           ListTile(
