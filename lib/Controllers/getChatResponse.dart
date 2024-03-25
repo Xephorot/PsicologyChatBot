@@ -31,7 +31,7 @@ Future<void> getChatResponse(
     maxToken: 100,
     temperature: 0.7,
   );
-
+  
   final response = await OpenAIClient.openAI.onChatCompletion(request: request);
   if (response != null && response.choices.isNotEmpty) {
     for (var element in response.choices) {
