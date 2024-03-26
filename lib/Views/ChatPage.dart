@@ -1,4 +1,4 @@
-import 'package:chatbot_psicologia/Controllers/getChatResponse.dart';
+import 'package:chatbot_psicologia/Controllers/Core/getChatResponse.dart';
 import 'package:flutter/material.dart';
 import 'package:dash_chat_2/dash_chat_2.dart';
 import 'package:chatbot_psicologia/Views/MenuLateral.dart';
@@ -10,7 +10,6 @@ class ChatPage extends StatefulWidget {
   @override
   State<ChatPage> createState() => _ChatPageState();
 }
-
 class _ChatPageState extends State<ChatPage> {
   @override
   Widget build(BuildContext context) {

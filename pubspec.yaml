@@ -11,6 +11,8 @@ dependencies:
     sdk: flutter
   chat_gpt_sdk: ^3.0.4
   dash_chat_2: ^0.0.20
+  shared_preferences: ^2.0.15
+  path_provider: ^2.1.2
 
 dev_dependencies:
   flutter_test:
