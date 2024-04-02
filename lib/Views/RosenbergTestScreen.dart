@@ -56,7 +56,6 @@ class _RosenbergTestScreenState extends State<RosenbergTestScreen> {
                     currentQuestionIndex++;
                   });
                 } else {
-                  //Muestra la puntacion
                   showDialog(
                     context: context,
                     builder: (context) => AlertDialog(
@@ -64,7 +63,7 @@ class _RosenbergTestScreenState extends State<RosenbergTestScreen> {
                           'Tu puntuación es: ${controller.calculateScore(userAnswers)}'),
                       actions: <Widget>[
                         ElevatedButton(
-                          onPressed: () {
+                          onPressed: () async { 
                             if (currentQuestionIndex <
                                 controller.questions.length - 1) {
                               setState(() {
@@ -73,22 +72,22 @@ class _RosenbergTestScreenState extends State<RosenbergTestScreen> {
                             } else {
                               int percentage =
                                   controller.calculateScore(userAnswers);
-                              showDialog(
+                              await showDialog(
                                 context: context,
                                 builder: (context) => AlertDialog(
                                   content: Text(
                                       'Tu nivel de autoestima es: $percentage%'),
                                   actions: <Widget>[
                                     TextButton(
-                                      onPressed: () {
-                                        Navigator.of(context)
-                                            .pop();
-                                      },
+                                      onPressed: () => Navigator.of(context)
+                                          .pop(),
                                       child: Text('OK'),
                                     ),
                                   ],
                                 ),
                               );
+                              Navigator.of(context)
+                                  .pop(); 
                             }
                           },
                           child: Text(currentQuestionIndex <
