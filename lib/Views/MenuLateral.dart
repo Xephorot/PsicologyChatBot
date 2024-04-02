@@ -2,7 +2,6 @@ import 'package:chatbot_psicologia/Controllers/MenuLateral/NewChatTile.dart';
 import 'package:chatbot_psicologia/Controllers/MenuLateral/StartTestTile.dart';
 import 'package:chatbot_psicologia/Controllers/MenuLateral/UserProfile.dart';
 import 'package:chatbot_psicologia/Controllers/MenuLateral/ViewChatTile.dart';
-import 'package:chatbot_psicologia/Controllers/MenuLateral/RosenbergTestTile.dart';
 import 'package:flutter/material.dart';
 
 class MenuLateral extends StatelessWidget {
@@ -18,7 +17,6 @@ class MenuLateral extends StatelessWidget {
           StartTestTile(),
           NewChatTile(),
           ViewChatTile(chatId: 1),
-          RosenbergTestTile(), 
         ],
       ),
     );

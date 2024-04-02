@@ -1,5 +1,4 @@
 import 'package:chatbot_psicologia/Views/ChatPage.dart';
-import 'package:chatbot_psicologia/Views/RosenbergTestScreen.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -11,11 +10,8 @@ class MainApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      routes: {
-         '/rosenbergTest': (context) => const RosenbergTestScreen(),
-      },
-      home: const ChatPage(),
+    return const MaterialApp(
+      home: ChatPage(),
     );
   }
 }
