@@ -11,7 +11,6 @@ class NewChatTile extends StatelessWidget {
       leading: const Icon(Icons.plus_one),
       title: const Text('Nuevo Chat'),
       onTap: () async {
-        // Asumiendo que restartAndSaveChat es un Future<void>
         await ChatController.instance.restartAndSaveChat(context);
         openChatScreen(context);
       },
