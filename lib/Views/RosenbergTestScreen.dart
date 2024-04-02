@@ -1,24 +1,112 @@
+import 'package:chatbot_psicologia/Controllers/RosenbergTestController.dart';
 import 'package:flutter/material.dart';
 
 class RosenbergTestScreen extends StatefulWidget {
-  const RosenbergTestScreen({Key? key}) : super(key: key);
+  const RosenbergTestScreen({super.key});
 
   @override
   _RosenbergTestScreenState createState() => _RosenbergTestScreenState();
 }
 
 class _RosenbergTestScreenState extends State<RosenbergTestScreen> {
-  // Aquí agregarás el código para manejar las preguntas y respuestas
+  final controller = RosenbergTestController();
+  int currentQuestionIndex = 0;
+  List<int> userAnswers = [];
 
   @override
   Widget build(BuildContext context) {
+    final currentQuestion = controller.questions[currentQuestionIndex];
+
     return Scaffold(
       appBar: AppBar(
         title: Text('Test de Autoestima de Rosenberg'),
       ),
-      body: Center(
-        child: Text('Aquí se mostrarán las preguntas del test.'),
-        // Implementa tu lógica de UI para el test aquí
+      body: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            Text(currentQuestion.questionText),
+            ...currentQuestion.answers.asMap().entries.map((entry) {
+              int idx = entry.key;
+              String answer = entry.value;
+              return ListTile(
+                title: Text(answer),
+                leading: Radio(
+                  value: idx,
+                  groupValue: userAnswers.length > currentQuestionIndex
+                      ? userAnswers[currentQuestionIndex]
+                      : null,
+                  onChanged: (int? value) {
+                    setState(() {
+                      if (userAnswers.length == currentQuestionIndex) {
+                        userAnswers.add(value!);
+                      } else {
+                        userAnswers[currentQuestionIndex] = value!;
+                      }
+                    });
+                  },
+                ),
+              );
+            }).toList(),
+            ElevatedButton(
+              onPressed: () {
+                if (currentQuestionIndex < controller.questions.length - 1) {
+                  setState(() {
+                    currentQuestionIndex++;
+                  });
+                } else {
+                  //Muestra la puntacion
+                  showDialog(
+                    context: context,
+                    builder: (context) => AlertDialog(
+                      content: Text(
+                          'Tu puntuación es: ${controller.calculateScore(userAnswers)}'),
+                      actions: <Widget>[
+                        ElevatedButton(
+                          onPressed: () {
+                            if (currentQuestionIndex <
+                                controller.questions.length - 1) {
+                              setState(() {
+                                currentQuestionIndex++;
+                              });
+                            } else {
+                              int percentage =
+                                  controller.calculateScore(userAnswers);
+                              showDialog(
+                                context: context,
+                                builder: (context) => AlertDialog(
+                                  content: Text(
+                                      'Tu nivel de autoestima es: $percentage%'),
+                                  actions: <Widget>[
+                                    TextButton(
+                                      onPressed: () {
+                                        Navigator.of(context)
+                                            .pop();
+                                      },
+                                      child: Text('OK'),
+                                    ),
+                                  ],
+                                ),
+                              );
+                            }
+                          },
+                          child: Text(currentQuestionIndex <
+                                  controller.questions.length - 1
+                              ? 'Siguiente'
+                              : 'Finalizar'),
+                        ),
+                      ],
+                    ),
+                  );
+                }
+              },
+              child: Text(currentQuestionIndex < controller.questions.length - 1
+                  ? 'Siguiente'
+                  : 'Finalizar'),
+            ),
+          ],
+        ),
       ),
     );
   }
