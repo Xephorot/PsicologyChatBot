@@ -63,31 +63,37 @@ class _RosenbergTestScreenState extends State<RosenbergTestScreen> {
                           'Tu puntuación es: ${controller.calculateScore(userAnswers)}'),
                       actions: <Widget>[
                         ElevatedButton(
-                          onPressed: () async { 
+                          onPressed: () async {
+                            // Hacer la función onPressed asíncrona
                             if (currentQuestionIndex <
                                 controller.questions.length - 1) {
                               setState(() {
                                 currentQuestionIndex++;
                               });
                             } else {
+                              // Calcula el porcentaje y muestra el diálogo
                               int percentage =
                                   controller.calculateScore(userAnswers);
                               await showDialog(
                                 context: context,
+                                barrierDismissible:
+                                    false, // Asegúrate de que el diálogo no pueda cerrarse tocando fuera de él
                                 builder: (context) => AlertDialog(
                                   content: Text(
                                       'Tu nivel de autoestima es: $percentage%'),
                                   actions: <Widget>[
                                     TextButton(
-                                      onPressed: () => Navigator.of(context)
-                                          .pop(),
+                                      onPressed: () {
+                                        Navigator.of(context)
+                                            .pop();
+                                        Navigator.of(context)
+                                            .pop(); 
+                                      },
                                       child: Text('OK'),
                                     ),
                                   ],
                                 ),
                               );
-                              Navigator.of(context)
-                                  .pop(); 
                             }
                           },
                           child: Text(currentQuestionIndex <
