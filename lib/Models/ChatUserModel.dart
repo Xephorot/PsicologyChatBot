@@ -13,3 +13,4 @@ class ChatMessageModel {
   static List<ChatMessage> messages = <ChatMessage>[];
   static List<ChatUser> typingUsers = <ChatUser>[];
 }
+
