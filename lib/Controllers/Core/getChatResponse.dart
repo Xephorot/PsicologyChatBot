@@ -53,3 +53,44 @@ Future<void> getChatResponse(
   updateStateCallback();
 }
 
+/*
+import 'package:chat_gpt_sdk/chat_gpt_sdk.dart';
+import 'package:chatbot_psicologia/Clients/OpenAIClient.dart';
+import 'package:dash_chat_2/dash_chat_2.dart';
+import 'package:chatbot_psicologia/Models/ChatUserModel.dart';
+
+String? globalThreadId;
+
+Future<void> getChatResponse(
+    ChatMessage message, Function() updateStateCallback) async {
+  ChatMessageModel.messages.insert(0, message);
+  ChatMessageModel.typingUsers.add(ChatUserModel.gptChatUser);
+  updateStateCallback();
+
+  String threadId;
+  if (globalThreadId == null) {
+    threadId = await OpenAIClient.createThreadAndRun(message.text);
+    globalThreadId = threadId;
+  } else {
+    threadId = globalThreadId!;
+    await OpenAIClient.createMessage(threadId, message.text);
+  }
+
+  final messages = await OpenAIClient.listMessage(threadId);
+
+  for (var msg in messages) {
+    if (msg.role == 'assistant') {
+      ChatMessageModel.messages.insert(
+        0,
+        ChatMessage(
+            user: ChatUserModel.gptChatUser,
+            createdAt: DateTime.now(),
+            text: msg.content),
+      );
+    }
+  }
+
+  ChatMessageModel.typingUsers.remove(ChatUserModel.gptChatUser);
+  updateStateCallback();
+}
+*/ 

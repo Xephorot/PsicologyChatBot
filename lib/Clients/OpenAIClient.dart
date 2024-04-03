@@ -1,5 +1,6 @@
 import 'package:chat_gpt_sdk/chat_gpt_sdk.dart';
 import 'package:chatbot_psicologia/APIs/consts.dart';
+import 'package:dash_chat_2/dash_chat_2.dart';
 
 class OpenAIClient {
   static final OpenAI openAI = OpenAI.instance.build(
@@ -18,7 +19,7 @@ class OpenAIClient {
   static Future<String> createThreadAndRun(String initialMessage) async {
     final request = CreateThreadAndRun(assistantId: 'asst_5H7O3C5O7Goh1QtoxTgDRcQa', thread: {
       "messages": [
-        {"role": "user", "content": initialMessage}
+        {"role": "user", "content": initialMessage} 
       ],
     });
     final response = await openAI.threads.runs.createThreadAndRun(request: request);
@@ -29,6 +30,20 @@ class OpenAIClient {
   static Future<void> createMessage(String threadId, String message) async {
     final request = CreateMessage(role: 'user', content: message);
     await openAI.threads.messages.createMessage(threadId: threadId, request: request);
+  }
+
+  static Future<List<ChatMessage>> listMessage(String threadId) async {
+
+    List<ChatMessage> messages = [];
+
+    // Aquí iría el código para llamar a la API y llenar la lista de mensajes.
+    // Por ejemplo:
+    // final response = await algunaFuncionParaObtenerMensajes(threadId);
+    // response.forEach((msgData) {
+    //   messages.add(ChatMessage(desde msgData));
+    // });
+
+    return messages;
   }
 
   // Otros métodos (listMessage, retrieveMessage, etc.) pueden ser añadidos aquí
