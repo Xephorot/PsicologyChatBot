@@ -19,7 +19,6 @@ Future<void> getChatResponse(
 
   final request = ChatCompleteText(
     model: GptTurbo0301ChatModel(),
-
     messages: [
       {
         "role": "system",
@@ -28,7 +27,7 @@ Future<void> getChatResponse(
       },
       ...messagesHistory.map((m) => m.toJson())
     ],
-    
+    temperature: 0.1,    
   );
   
   final response = await OpenAIClient.openAI.onChatCompletion(request: request);
