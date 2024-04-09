@@ -13,7 +13,7 @@ class ChatPage extends StatefulWidget {
 }
 
 class _ChatPageState extends State<ChatPage> {
-  double nivelEstresPorcentaje = 0.0; // Inicia en 0%
+  double nivelEstresPorcentaje = 0.0;
 
   @override
   Widget build(BuildContext context) {
