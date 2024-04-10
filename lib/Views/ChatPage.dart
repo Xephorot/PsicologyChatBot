@@ -1,9 +1,10 @@
+import 'package:chatbot_psicologia/Controllers/Chat/ChatStressLevelCalculator.dart';
+import 'package:chatbot_psicologia/Views/StressLevelIndicator.dart';
 import 'package:flutter/material.dart';
 import 'package:dash_chat_2/dash_chat_2.dart';
 import 'package:chatbot_psicologia/Controllers/Core/getChatResponse.dart';
 import 'package:chatbot_psicologia/Views/MenuLateral.dart';
 import 'package:chatbot_psicologia/Models/ChatUserModel.dart';
-import 'package:getwidget/getwidget.dart';
 
 class ChatPage extends StatefulWidget {
   const ChatPage({super.key});
@@ -13,7 +14,18 @@ class ChatPage extends StatefulWidget {
 }
 
 class _ChatPageState extends State<ChatPage> {
-  double nivelEstresPorcentaje = 0.0; // Inicia en 0%
+  double nivelEstresPorcentaje = 0.0; // Paso 2: Estado para nivel de estrés
+
+  void _handleMessageSend(ChatMessage message) {
+    // Aquí puedes implementar la lógica cuando se envía un mensaje.
+    // Por ejemplo, ajustar el nivel de estrés basado en el mensaje.
+    getChatResponse(message, () {
+      setState(() {
+        nivelEstresPorcentaje += 0.1; // Simula el cálculo del nivel de estrés
+        if (nivelEstresPorcentaje > 1) nivelEstresPorcentaje = 1;
+      });
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -21,15 +33,7 @@ class _ChatPageState extends State<ChatPage> {
       appBar: AppBar(
         backgroundColor: const Color.fromRGBO(139, 0, 0, 1),
         title: Center(
-          child: GFProgressBar(
-            percentage: nivelEstresPorcentaje,
-            lineHeight: 20,
-            alignment: MainAxisAlignment.spaceBetween,
-            leading: const Icon(Icons.sentiment_satisfied, color: Colors.green), // Ícono ahora en leading
-            trailing: const Icon(Icons.sentiment_dissatisfied, color: Colors.red), // Ícono ahora en trailing
-            backgroundColor: Colors.black12,
-            progressBarColor: GFColors.DANGER,
-          ),
+          child: StressLevelIndicator(stressLevel: nivelEstresPorcentaje), // Paso 2: Usar StressLevelIndicator
         ),
         iconTheme: const IconThemeData(color: Colors.white),
       ),
@@ -42,14 +46,8 @@ class _ChatPageState extends State<ChatPage> {
           containerColor: Color.fromRGBO(139, 0, 0, 1),
           textColor: Colors.white,
         ),
-        onSend: (ChatMessage m) {
-          getChatResponse(m, () {
-            setState(() {
-              // Incrementa el nivel de estrés por cada mensaje enviado
-              nivelEstresPorcentaje += 0.1;
-              if (nivelEstresPorcentaje > 1) nivelEstresPorcentaje = 1; // Asegura que no sea mayor a 100%
-            });
-          });
+        onSend: (ChatMessage message) {
+          _handleMessageSend(message); // Paso 4: Manejo del envío de mensajes
         },
         messages: ChatMessageModel.messages,
       ),
