@@ -32,6 +32,7 @@ Future<void> getChatResponse(
 
   final response = await OpenAIClient.openAI.onChatCompletion(request: request);
 
+  //TODO: Implementar Prints o console logs, que delimite que es que print
   if (response != null && response.choices.isNotEmpty) {
     for (var element in response.choices) {
       if (element.message != null) {
@@ -50,6 +51,7 @@ Future<void> getChatResponse(
     updateStateCallback();
   }
 
+  //TODO: Implementar Prints o console logs, que delimite que es que print
   for (var message in ChatMessageModel.messages) {
     print('${message.user.runtimeType}: ${message.text}');
   }
