@@ -5,9 +5,9 @@ class ViewChatTile extends StatelessWidget {
   final int chatId;
 
   const ViewChatTile({
-    Key? key,
+    super.key,
     required this.chatId,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
