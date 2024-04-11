@@ -13,19 +13,6 @@ class ChatPage extends StatefulWidget {
 }
 
 class _ChatPageState extends State<ChatPage> {
-  double nivelEstresPorcentaje = 0.0; // Paso 2: Estado para nivel de estrés
-
-  void _handleMessageSend(ChatMessage message) {
-    // Aquí puedes implementar la lógica cuando se envía un mensaje.
-    // Por ejemplo, ajustar el nivel de estrés basado en el mensaje.
-    getChatResponse(message, () {
-      setState(() {
-        nivelEstresPorcentaje += 0.1; // Simula el cálculo del nivel de estrés
-        if (nivelEstresPorcentaje > 1) nivelEstresPorcentaje = 1;
-      });
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
