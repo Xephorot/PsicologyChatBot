@@ -6,7 +6,6 @@ import 'package:chatbot_psicologia/Models/ChatUserModel.dart';
 
 Future<void> getChatResponse(
     ChatMessage message, Function() updateStateCallback) async {
-  Map<String, dynamic> chatGPTInfo = {};
   ChatMessageModel.messages.insert(0, message);
   ChatMessageModel.typingUsers.add(ChatUserModel.gptChatUser);
   updateStateCallback();

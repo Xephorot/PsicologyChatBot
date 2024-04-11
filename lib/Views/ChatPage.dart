@@ -16,6 +16,7 @@ class ChatPage extends StatefulWidget {
 class _ChatPageState extends State<ChatPage> {
   double nivelEstresPorcentaje = 0.0;
 
+  //Para el envio de mensajes hacia la vista
   void _handleMessageSend(ChatMessage message) {
     // Aquí puedes implementar la lógica cuando se envía un mensaje.
     // Por ejemplo, ajustar el nivel de estrés basado en el mensaje.
