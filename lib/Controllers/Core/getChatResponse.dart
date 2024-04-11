@@ -37,31 +37,7 @@ Future<void> getChatResponse(
     for (var element in response.choices) {
       if (element.message != null) {
         print('ChatGPT: ${element.message!.content}');
-
-        // Crear un mapa con la información de ChatGPT
-        Map<String, dynamic> chatGPTInfo = {
-          'model': request.model.model,
-          'temperature': request.temperature,
-          'topP': request.topP,
-          'n': request.n,
-          'stream': request.stream,
-          'stop': request.stop,
-          'maxTokens': request.maxToken,
-          'presencePenalty': request.presencePenalty,
-          'frequencyPenalty': request.frequencyPenalty,
-          'user': request.user,
-          'responseFormat': request.responseFormat?.toJson(),
-          'logitBias': request.logitBias,
-          'logprobs': request.logprobs,
-          'topLogprobs': request.topLogprobs,
-          'seed': request.seed,
-          'toolChoice': request.toolChoice,
-          'tools': request.tools,
-        };
-
-        // Imprimir el mapa en formato JSON
-        print('Información de ChatGPT: ${jsonEncode(chatGPTInfo)}');
-
+        
         ChatMessageModel.messages.insert(
           0,
           ChatMessage(
