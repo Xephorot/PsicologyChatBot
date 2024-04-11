@@ -1,4 +1,3 @@
-import 'package:chatbot_psicologia/Controllers/Chat/ChatStressLevelCalculator.dart';
 import 'package:chatbot_psicologia/Views/StressLevelIndicator.dart';
 import 'package:flutter/material.dart';
 import 'package:dash_chat_2/dash_chat_2.dart';
