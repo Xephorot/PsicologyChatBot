@@ -1,4 +1,3 @@
-import 'dart:convert';
 import 'package:chat_gpt_sdk/chat_gpt_sdk.dart';
 import 'package:chatbot_psicologia/Clients/OpenAIClient.dart';
 import 'package:dash_chat_2/dash_chat_2.dart';
@@ -37,7 +36,7 @@ Future<void> getChatResponse(
     for (var element in response.choices) {
       if (element.message != null) {
         print('ChatGPT: ${element.message!.content}');
-        
+
         ChatMessageModel.messages.insert(
           0,
           ChatMessage(
