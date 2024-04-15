@@ -11,19 +11,17 @@ class ChatPage extends StatefulWidget {
   @override
   State<ChatPage> createState() => _ChatPageState();
 }
-//!Puse una version anterior debido que la que me diste santi no llamaba al CORE, arregla desde aqui y recuerda ESCALABLE
 
 class _ChatPageState extends State<ChatPage> {
   double nivelEstresPorcentaje = 0.0;
 
   //Para el envio de mensajes hacia la vista
   void _handleMessageSend(ChatMessage message) {
-    // Aquí puedes implementar la lógica cuando se envía un mensaje.
-    // Por ejemplo, ajustar el nivel de estrés basado en el mensaje.
     getChatResponse(message, () {
+      setState(() {});
+    }, (newStressLevel) {
       setState(() {
-        nivelEstresPorcentaje += 0.1; // Simula el cálculo del nivel de estrés
-        if (nivelEstresPorcentaje > 1) nivelEstresPorcentaje = 1;
+        nivelEstresPorcentaje = newStressLevel;
       });
     });
   }
@@ -34,7 +32,7 @@ class _ChatPageState extends State<ChatPage> {
       appBar: AppBar(
         backgroundColor: const Color.fromRGBO(139, 0, 0, 1),
         title: Center(
-          child: StressLevelIndicator(stressLevel: nivelEstresPorcentaje), // Paso 2: Usar StressLevelIndicator
+          child: StressLevelIndicator(stressLevel: nivelEstresPorcentaje), 
         ),
         iconTheme: const IconThemeData(color: Colors.white),
       ),
@@ -48,7 +46,7 @@ class _ChatPageState extends State<ChatPage> {
           textColor: Colors.white,
         ),
         onSend: (ChatMessage message) {
-          _handleMessageSend(message); // Paso 4: Manejo del envío de mensajes
+          _handleMessageSend(message); 
         },
         messages: ChatMessageModel.messages,
       ),
