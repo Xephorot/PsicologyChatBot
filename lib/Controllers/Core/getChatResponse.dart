@@ -58,11 +58,9 @@ Future<void> getChatResponse(
     updateStateCallback();
   }
   
-
   //TODO: Implementar Prints o console logs, que delimite que es que print
   for (var message in ChatMessageModel.messages) {
     print('${message.user.runtimeType}: ${message.text}');
-    
   }
 
   ChatMessageModel.typingUsers.remove(ChatUserModel.gptChatUser);

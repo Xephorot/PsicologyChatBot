@@ -15,7 +15,7 @@ class ChatPage extends StatefulWidget {
 class _ChatPageState extends State<ChatPage> {
   double nivelEstresPorcentaje = 0.0;
 
-  //Para el envio de mensajes hacia la vista
+  //Aqui se recibe para actualizar el medidor de estress
   void _handleMessageSend(ChatMessage message) {
     getChatResponse(message, () {
       setState(() {});
@@ -45,6 +45,7 @@ class _ChatPageState extends State<ChatPage> {
           containerColor: Color.fromRGBO(139, 0, 0, 1),
           textColor: Colors.white,
         ),
+        //Aqui se actualiza el chat
         onSend: (ChatMessage message) {
           _handleMessageSend(message); 
         },
