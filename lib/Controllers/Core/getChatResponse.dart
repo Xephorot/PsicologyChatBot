@@ -3,8 +3,8 @@ import 'package:chatbot_psicologia/Clients/OpenAIClient.dart';
 import 'package:dash_chat_2/dash_chat_2.dart';
 import 'package:chatbot_psicologia/Models/ChatUserModel.dart';
 
-Future<void> getChatResponse(
-    ChatMessage message, Function() updateStateCallback, updateStressLevel) async {
+Future<void> getChatResponse(ChatMessage message,
+    Function() updateStateCallback, updateStressLevel) async {
   ChatMessageModel.messages.insert(0, message);
   ChatMessageModel.typingUsers.add(ChatUserModel.gptChatUser);
   updateStateCallback();
@@ -57,7 +57,7 @@ Future<void> getChatResponse(
     }
     updateStateCallback();
   }
-  
+
   //TODO: Implementar Prints o console logs, que delimite que es que print
   for (var message in ChatMessageModel.messages) {
     print('${message.user.runtimeType}: ${message.text}');

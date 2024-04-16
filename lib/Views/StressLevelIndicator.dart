@@ -4,7 +4,7 @@ import 'package:getwidget/getwidget.dart';
 class StressLevelIndicator extends StatelessWidget {
   final double stressLevel;
 
-  const StressLevelIndicator({Key? key, required this.stressLevel}) : super(key: key);
+  const StressLevelIndicator({super.key, required this.stressLevel});
 
   @override
   Widget build(BuildContext context) {

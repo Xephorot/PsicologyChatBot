@@ -5,10 +5,10 @@ class ChatStressLevelCalculator extends StatefulWidget {
   final Function onStressLevelChanged;
 
   const ChatStressLevelCalculator({
-    Key? key,
+    super.key,
     required this.nivelEstresPorcentaje,
     required this.onStressLevelChanged,
-  }) : super(key: key);
+  });
 
   @override
   _ChatStressLevelCalculatorState createState() => _ChatStressLevelCalculatorState();

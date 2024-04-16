@@ -20,10 +20,10 @@ class NewChatTile extends StatelessWidget {
 
 void openChatScreen(BuildContext context) {
   Navigator.of(context).push(PageRouteBuilder(
-    pageBuilder: (context, animation, secondaryAnimation) => ChatPage(),
-    transitionDuration: Duration(milliseconds: 350),
+    pageBuilder: (context, animation, secondaryAnimation) => const ChatPage(),
+    transitionDuration: const Duration(milliseconds: 350),
     transitionsBuilder: (context, animation, secondaryAnimation, child) {
-      var begin = Offset(0.0, 1.0);
+      var begin = const Offset(0.0, 1.0);
       var end = Offset.zero;
       var curve = Curves.easeOut;
 
