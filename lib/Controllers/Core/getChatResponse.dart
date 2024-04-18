@@ -35,6 +35,7 @@ Future<void> getChatResponse(ChatMessage message,
   //! Agregar limite de caracteres para el usuario
   //! Mensajes de esperar, reintentar cuando halla un error
   
+  
   final response = await OpenAIClient.openAI.onChatCompletion(request: request);
 
   //TODO: Implementar Prints o console logs, que delimite que es que print
