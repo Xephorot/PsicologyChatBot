@@ -8,15 +8,14 @@ class ChatController {
   final ChatOperations _chatOperations = ChatOperations();
   final ChatManagement _chatManagement = ChatManagement();
 
-   ChatController._internal();
+  ChatController._internal();
 
+  // Método para reiniciar y guardar el chat
   Future<void> restartAndSaveChat(BuildContext context) async {
-    await _chatOperations.restartAndSaveChat(context, () {
-      Navigator.of(context).pop();
-      _restartUI(context);
-    });
+    await _chatOperations.restartAndSaveChat(context, () => _restartUI(context));
   }
 
+  // Método privado para reiniciar la interfaz de usuario
   void _restartUI(BuildContext context) {
     Navigator.of(context).pushAndRemoveUntil(
       MaterialPageRoute(builder: (context) => const ChatPage()),
@@ -24,11 +23,14 @@ class ChatController {
     );
   }
 
+  // Método para iniciar una prueba
   void startTest(BuildContext context) {
     _chatManagement.startTest(context);
   }
 
+  // Método para ver un chat específico
   void viewChat(BuildContext context, int chatId) {
     _chatManagement.viewChat(context, chatId);
   }
 }
+
