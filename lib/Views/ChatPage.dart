@@ -14,12 +14,12 @@ class ChatPage extends StatefulWidget {
 
 class _ChatPageState extends State<ChatPage> {
   double nivelEstresPorcentaje = 0.0;
-  bool isSendButtonEnabled = true;  // Estado para controlar el botón de envío
+  bool isSendButtonEnabled = true;
 
   void _handleMessageSend(ChatMessage message) {
-    if (!isSendButtonEnabled) return;  // No procesar si el botón está deshabilitado
+    if (!isSendButtonEnabled) return;
 
-    isSendButtonEnabled = false;  // Deshabilitar el botón de envío
+    isSendButtonEnabled = false;
     getChatResponse(message, () {
       setState(() {});
     }, (newStressLevel) {
@@ -29,7 +29,7 @@ class _ChatPageState extends State<ChatPage> {
     });
     Future.delayed(const Duration(seconds: 3), () {
       setState(() {
-        isSendButtonEnabled = true;  // Re-habilitar el botón después de 3 segundos
+        isSendButtonEnabled = true;
       });
     });
   }
