@@ -53,7 +53,7 @@ class _ChatPageState extends State<ChatPage> {
           containerColor: Color.fromRGBO(139, 0, 0, 1),
           textColor: Colors.white,
         ),
-        onSend: _handleMessageSend,  // Asignar siempre el método, control interno
+        onSend: _handleMessageSend,  
         messages: ChatMessageModel.messages,
       ),
     );
