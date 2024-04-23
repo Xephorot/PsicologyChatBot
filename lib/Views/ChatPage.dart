@@ -26,12 +26,37 @@ class _ChatPageState extends State<ChatPage> {
       setState(() {
         nivelEstresPorcentaje = newStressLevel;
       });
+    }, (error) {
+      _showErrorDialog(error);
     });
+
     Future.delayed(const Duration(seconds: 3), () {
       setState(() {
         isSendButtonEnabled = true;
       });
     });
+  }
+
+  void _showErrorDialog(Exception error) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: const Text('Error'),
+          content: Text('Error: ${error.toString()}'),
+          actions: <Widget>[
+            TextButton(
+              child: const Text('Reintentar'),
+              onPressed: () {
+                // Aquí puedes incluir la lógica para reintentar la operación fallida
+                ChatMessageModel.typingUsers.remove(ChatUserModel.gptChatUser);
+                Navigator.of(context).pop(); // Cierra el diálogo
+              },
+            ),
+          ],
+        );
+      },
+    );
   }
 
   @override
@@ -40,7 +65,7 @@ class _ChatPageState extends State<ChatPage> {
       appBar: AppBar(
         backgroundColor: const Color.fromRGBO(139, 0, 0, 1),
         title: Center(
-          child: StressLevelIndicator(stressLevel: nivelEstresPorcentaje), 
+          child: StressLevelIndicator(stressLevel: nivelEstresPorcentaje),
         ),
         iconTheme: const IconThemeData(color: Colors.white),
       ),
@@ -54,9 +79,9 @@ class _ChatPageState extends State<ChatPage> {
           textColor: Colors.white,
         ),
         inputOptions: const InputOptions(
-          maxInputLength: 200, 
+          maxInputLength: 200,
         ),
-        onSend: _handleMessageSend,  
+        onSend: _handleMessageSend,
         messages: ChatMessageModel.messages,
       ),
     );
