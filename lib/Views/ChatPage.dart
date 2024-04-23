@@ -53,11 +53,12 @@ class _ChatPageState extends State<ChatPage> {
           containerColor: Color.fromRGBO(139, 0, 0, 1),
           textColor: Colors.white,
         ),
+        inputOptions: const InputOptions(
+          maxInputLength: 200, 
+        ),
         onSend: _handleMessageSend,  
         messages: ChatMessageModel.messages,
       ),
     );
   }
 }
-
-
