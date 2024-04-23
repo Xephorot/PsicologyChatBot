@@ -48,9 +48,8 @@ class _ChatPageState extends State<ChatPage> {
             TextButton(
               child: const Text('Reintentar'),
               onPressed: () {
-                // Aquí puedes incluir la lógica para reintentar la operación fallida
                 ChatMessageModel.typingUsers.remove(ChatUserModel.gptChatUser);
-                Navigator.of(context).pop(); // Cierra el diálogo
+                Navigator.of(context).pop();
               },
             ),
           ],
