@@ -31,8 +31,6 @@ Future<void> getChatResponse(ChatMessage message,
   );
 
   //! Tenemos que implementar un sistema de try except para manejar errores.
-  //! Bloquear Chat por 3 segundos por cada mensaje mandado por el usuario
-  //! Agregar limite de caracteres para el usuario
   //! Mensajes de esperar, reintentar cuando halla un error
 
   final response = await OpenAIClient.openAI.onChatCompletion(request: request);
