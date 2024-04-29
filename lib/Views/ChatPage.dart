@@ -1,9 +1,10 @@
-import 'package:chatbot_psicologia/Views/StressLevelIndicator.dart';
 import 'package:flutter/material.dart';
 import 'package:dash_chat_2/dash_chat_2.dart';
-import 'package:chatbot_psicologia/Controllers/Core/getChatResponse.dart';
-import 'package:chatbot_psicologia/Views/MenuLateral.dart';
 import 'package:chatbot_psicologia/Models/ChatUserModel.dart';
+import 'package:chatbot_psicologia/Models/ChatModel.dart';
+import 'package:chatbot_psicologia/Controllers/Chat/ChatPageController.dart';
+import 'package:chatbot_psicologia/Views/MenuLateral.dart';
+import 'package:chatbot_psicologia/Views/StressLevelIndicator.dart';
 
 class ChatPage extends StatefulWidget {
   const ChatPage({super.key});
@@ -13,49 +14,13 @@ class ChatPage extends StatefulWidget {
 }
 
 class _ChatPageState extends State<ChatPage> {
-  double nivelEstresPorcentaje = 0.0;
-  bool isSendButtonEnabled = true;
+  final ChatModel model = ChatModel();
+  late final ChatController controller;
 
-  void _handleMessageSend(ChatMessage message) {
-    if (!isSendButtonEnabled) return;
-
-    isSendButtonEnabled = false;
-    getChatResponse(message, () {
-      setState(() {});
-    }, (newStressLevel) {
-      setState(() {
-        nivelEstresPorcentaje = newStressLevel;
-      });
-    }, (error) {
-      _showErrorDialog(error);
-    });
-
-    Future.delayed(const Duration(seconds: 3), () {
-      setState(() {
-        isSendButtonEnabled = true;
-      });
-    });
-  }
-
-  void _showErrorDialog(Exception error) {
-    showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        return AlertDialog(
-          title: const Text('Error'),
-          content: Text('Error: ${error.toString()}'),
-          actions: <Widget>[
-            TextButton(
-              child: const Text('Reintentar'),
-              onPressed: () {
-                ChatMessageModel.typingUsers.remove(ChatUserModel.gptChatUser);
-                Navigator.of(context).pop();
-              },
-            ),
-          ],
-        );
-      },
-    );
+  @override
+  void initState() {
+    super.initState();
+    controller = ChatController(model);
   }
 
   @override
@@ -64,7 +29,7 @@ class _ChatPageState extends State<ChatPage> {
       appBar: AppBar(
         backgroundColor: const Color.fromRGBO(139, 0, 0, 1),
         title: Center(
-          child: StressLevelIndicator(stressLevel: nivelEstresPorcentaje),
+          child: StressLevelIndicator(stressLevel: model.stressLevelPercentage),
         ),
         iconTheme: const IconThemeData(color: Colors.white),
       ),
@@ -80,7 +45,7 @@ class _ChatPageState extends State<ChatPage> {
         inputOptions: const InputOptions(
           maxInputLength: 200,
         ),
-        onSend: _handleMessageSend,
+        onSend: (message) => controller.handleMessageSend(message, () => setState(() {}), context),
         messages: ChatMessageModel.messages,
       ),
     );
