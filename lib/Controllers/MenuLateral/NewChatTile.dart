@@ -8,8 +8,8 @@ class NewChatTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListTile(
-      leading: const Icon(Icons.plus_one),
-      title: const Text('Nuevo Chat'),
+      leading: const Icon(Icons.chat),
+      title: const Text('Inicar nuevo chat'),
       onTap: () async {
         await ChatController.instance.restartAndSaveChat(context);
         openChatScreen(context);

@@ -1,6 +1,5 @@
 import 'package:chatbot_psicologia/Controllers/MenuLateral/NewChatTile.dart';
 import 'package:chatbot_psicologia/Controllers/MenuLateral/UserProfile.dart';
-import 'package:chatbot_psicologia/Controllers/MenuLateral/ViewChatTile.dart';
 import 'package:flutter/material.dart';
 
 class MenuLateral extends StatelessWidget {
@@ -14,7 +13,6 @@ class MenuLateral extends StatelessWidget {
         children: const <Widget>[
           UserProfile(),
           NewChatTile(),
-          ViewChatTile(chatId: 1),
         ],
       ),
     );
