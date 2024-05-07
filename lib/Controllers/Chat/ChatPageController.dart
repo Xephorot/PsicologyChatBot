@@ -6,7 +6,6 @@ import 'package:flutter/material.dart';
 
 class ChatController {
   final ChatModel model;
-
   ChatController(this.model);
 
   void handleMessageSend(ChatMessage message, Function updateState, BuildContext context) {
