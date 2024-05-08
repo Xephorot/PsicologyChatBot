@@ -18,7 +18,8 @@ dependencies:
   flutter_dotenv: ^5.1.0
 
   speech_to_text: ^6.3.0
-
+  flutter_tts: ^3.8.3
+  
 dev_dependencies:
   flutter_test:
     sdk: flutter

@@ -1,4 +1,5 @@
 import 'package:chatbot_psicologia/Controllers/Core/getChatResponse.dart';
+import 'package:chatbot_psicologia/Controllers/TextToSpeech/TtsController.dart';
 import 'package:chatbot_psicologia/Models/ChatModel.dart';
 import 'package:chatbot_psicologia/Models/ChatUserModel.dart';
 import 'package:dash_chat_2/dash_chat_2.dart';
@@ -8,22 +9,29 @@ class ChatController {
   final ChatModel model;
   ChatController(this.model);
 
-  void handleMessageSend(ChatMessage message, Function updateState, BuildContext context) {
+  void handleMessageSend(
+      ChatMessage message, Function updateState, BuildContext context) {
     if (!model.isSendButtonEnabled) return;
 
     model.setSendButtonState(false);
     updateState();
 
-    getChatResponse(message, () {
-      updateState();
-    }, (newStressLevel) {
-      model.updateStressLevel(newStressLevel);
-      updateState();
-    }, (error) {
-      showErrorDialog(context, error);
-      model.setSendButtonState(true);
-      updateState();
-    });
+    getChatResponse(
+      message,
+      () {
+        updateState();
+      },
+      (newStressLevel) {
+        model.updateStressLevel(newStressLevel);
+        updateState();
+      },
+      (error) {
+        showErrorDialog(context, error);
+        model.setSendButtonState(true);
+        updateState();
+      },
+      TTSController(),
+    );
 
     Future.delayed(const Duration(seconds: 3), () {
       model.setSendButtonState(true);

@@ -1,16 +1,23 @@
 import 'package:chat_gpt_sdk/chat_gpt_sdk.dart';
 import 'package:chatbot_psicologia/Clients/OpenAIClient.dart';
+import 'package:chatbot_psicologia/Controllers/TextToSpeech/TtsController.dart';
 import 'package:dash_chat_2/dash_chat_2.dart';
 import 'package:chatbot_psicologia/Models/ChatUserModel.dart';
+import 'package:flutter/material.dart';
 
-Future<void> getChatResponse(ChatMessage message,
-    Function() updateStateCallback, updateStressLevel, Function(Exception) handleError) async {
+Future<void> getChatResponse(
+    ChatMessage message,
+    Function() updateStateCallback,
+    updateStressLevel,
+    Function(Exception) handleError,
+    TTSController ttsController) async {
   try {
     ChatMessageModel.messages.insert(0, message);
     ChatMessageModel.typingUsers.add(ChatUserModel.gptChatUser);
     updateStateCallback();
 
-    List<Messages> messagesHistory = ChatMessageModel.messages.reversed.map((m) {
+    List<Messages> messagesHistory =
+        ChatMessageModel.messages.reversed.map((m) {
       if (m.user == ChatUserModel.currentUser) {
         return Messages(role: Role.user, content: m.text);
       } else {
@@ -30,34 +37,36 @@ Future<void> getChatResponse(ChatMessage message,
       ],
       temperature: 0.1,
     );
-
-    final response = await OpenAIClient.openAI.onChatCompletion(request: request);
+    final response =
+        await OpenAIClient.openAI.onChatCompletion(request: request);
 
     if (response != null && response.choices.isNotEmpty) {
       for (var element in response.choices) {
         if (element.message != null) {
+          String responseText = element.message!.content;
           ChatMessageModel.messages.insert(
             0,
             ChatMessage(
               user: ChatUserModel.gptChatUser,
               createdAt: DateTime.now(),
-              text: element.message!.content,
+              text: responseText,
             ),
           );
-          if (element.message!.content.contains("Bajo")) {
+          if (ttsController.isTtsEnabled) {
+            WidgetsBinding.instance.addPostFrameCallback((_) {
+              ttsController.speak(responseText);
+            });
+          }
+          if (responseText.contains("Bajo")) {
             updateStressLevel(0.1);
-          } else if (element.message!.content.contains("Medio")) {
+          } else if (responseText.contains("Medio")) {
             updateStressLevel(0.5);
-          } else if (element.message!.content.contains("Alto")) {
+          } else if (responseText.contains("Alto")) {
             updateStressLevel(0.9);
           }
         }
       }
       updateStateCallback();
-    }
-
-    for (var message in ChatMessageModel.messages) {
-      print('${message.user.runtimeType}: ${message.text}');
     }
 
     ChatMessageModel.typingUsers.remove(ChatUserModel.gptChatUser);

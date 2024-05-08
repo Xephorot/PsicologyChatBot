@@ -1,3 +1,5 @@
+import 'package:chatbot_psicologia/Controllers/TextToSpeech/TtsController.dart';
+import 'package:chatbot_psicologia/Views/TtsResponseSpeaker.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:dash_chat_2/dash_chat_2.dart';
@@ -19,6 +21,8 @@ class _ChatPageState extends State<ChatPage> {
   final ChatModel model = ChatModel();
   late final ChatController controller;
   late final VoiceController voiceController;
+  late final TTSController ttsController;
+  late final TTSResponseSpeaker ttsResponseSpeaker;
   String _text = '';
 
   @override
@@ -26,7 +30,14 @@ class _ChatPageState extends State<ChatPage> {
     super.initState();
     controller = ChatController(model);
     voiceController = VoiceController();
+    ttsController = TTSController();
+    ttsResponseSpeaker = TTSResponseSpeaker(ttsController: ttsController);
     voiceController.initialize();
+  }
+
+  void updateState() {
+    setState(() {});
+    ttsResponseSpeaker.speakLastResponse(ChatMessageModel.messages);
   }
 
   @override
@@ -38,6 +49,16 @@ class _ChatPageState extends State<ChatPage> {
           child: StressLevelIndicator(stressLevel: model.stressLevelPercentage),
         ),
         iconTheme: const IconThemeData(color: Colors.white),
+        actions: [
+          IconButton(
+            icon: Icon(ttsController.isTtsEnabled ? Icons.volume_up : Icons.volume_off),
+            onPressed: () {
+              setState(() {
+                ttsController.toggleTts();
+              });
+            },
+          ),
+        ],
       ),
       drawer: const MenuLateral(),
       body: Column(
@@ -79,7 +100,7 @@ class _ChatPageState extends State<ChatPage> {
                                   user: ChatUserModel.currentUser,
                                   createdAt: DateTime.now(),
                                 );
-                                controller.handleMessageSend(message, () => setState(() {}), context);
+                                controller.handleMessageSend(message, updateState, context);
                               }
                             });
                           }, () {
@@ -91,7 +112,7 @@ class _ChatPageState extends State<ChatPage> {
                   ),
                 ),
               ),
-              onSend: (message) => controller.handleMessageSend(message, () => setState(() {}), context),
+              onSend: (message) => controller.handleMessageSend(message, updateState, context),
               messages: ChatMessageModel.messages,
             ),
           ),
