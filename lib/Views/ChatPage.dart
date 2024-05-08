@@ -74,7 +74,7 @@ class _ChatPageState extends State<ChatPage> {
                   inputOptions: InputOptions(
                     maxInputLength: 200,
                     inputDecoration: InputDecoration(
-                      hintText: 'Type here or use voice',
+                      hintText: 'Escribe aqui...',
                       suffixIcon: Container(
                         decoration: BoxDecoration(
                           color: voiceController.isListening ? Colors.green : Colors.red,
@@ -123,7 +123,7 @@ class _ChatPageState extends State<ChatPage> {
           ),
           Padding(
             padding: const EdgeInsets.all(8.0),
-            child: Text('Voice Input: $_text'),
+            child: Text('Input por Voz: $_text'),
           ),
         ],
       ),
