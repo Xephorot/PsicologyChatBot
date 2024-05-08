@@ -3,28 +3,46 @@ import 'package:chatbot_psicologia/Controllers/TextToSpeech/TtsController.dart';
 import 'package:chatbot_psicologia/Models/ChatUserModel.dart';
 import 'package:dash_chat_2/dash_chat_2.dart';
 
-class TTSResponseSpeaker extends StatelessWidget {
+class TTSResponseSpeaker extends StatefulWidget {
+  final List<ChatMessage> messages;
   final TTSController ttsController;
 
   const TTSResponseSpeaker({
     Key? key,
+    required this.messages,
     required this.ttsController,
   }) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
-    return Container();
+  _TTSResponseSpeakerState createState() => _TTSResponseSpeakerState();
+}
+
+class _TTSResponseSpeakerState extends State<TTSResponseSpeaker> {
+  String lastSpokenText = '';
+
+  @override
+  void didUpdateWidget(TTSResponseSpeaker oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    _speakLastResponse();
   }
 
-  void speakLastResponse(List<ChatMessage> messages) {
-    if (ttsController.isTtsEnabled) {
-      final responseMessages = messages
+  void _speakLastResponse() {
+    if (widget.ttsController.isTtsEnabled) {
+      final responseMessages = widget.messages
           .where((message) => message.user.id == ChatUserModel.gptChatUser.id)
           .toList();
       if (responseMessages.isNotEmpty) {
         final latestResponse = responseMessages.first.text;
-        ttsController.speak(latestResponse);
+        if (latestResponse != lastSpokenText) {
+          widget.ttsController.speak(latestResponse);
+          lastSpokenText = latestResponse;
+        }
       }
     }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Container();
   }
 }

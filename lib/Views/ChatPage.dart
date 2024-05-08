@@ -22,7 +22,6 @@ class _ChatPageState extends State<ChatPage> {
   late final ChatController controller;
   late final VoiceController voiceController;
   late final TTSController ttsController;
-  late final TTSResponseSpeaker ttsResponseSpeaker;
   String _text = '';
 
   @override
@@ -31,13 +30,11 @@ class _ChatPageState extends State<ChatPage> {
     controller = ChatController(model);
     voiceController = VoiceController();
     ttsController = TTSController();
-    ttsResponseSpeaker = TTSResponseSpeaker(ttsController: ttsController);
     voiceController.initialize();
   }
 
   void updateState() {
     setState(() {});
-    ttsResponseSpeaker.speakLastResponse(ChatMessageModel.messages);
   }
 
   @override
@@ -64,56 +61,64 @@ class _ChatPageState extends State<ChatPage> {
       body: Column(
         children: [
           Expanded(
-            child: DashChat(
-              currentUser: ChatUserModel.currentUser,
-              typingUsers: ChatMessageModel.typingUsers,
-              messageOptions: const MessageOptions(
-                currentUserContainerColor: Colors.black,
-                containerColor: Color.fromRGBO(139, 0, 0, 1),
-                textColor: Colors.white,
-              ),
-              inputOptions: InputOptions(
-                maxInputLength: 200,
-                inputDecoration: InputDecoration(
-                  hintText: 'Type here or use voice',
-                  suffixIcon: Container(
-                    decoration: BoxDecoration(
-                      color: voiceController.isListening ? Colors.green : Colors.red,
-                      borderRadius: BorderRadius.circular(30),
-                    ),
-                    child: IconButton(
-                      icon: Icon(
-                          voiceController.isListening ? Icons.mic_off : Icons.mic,
-                          color: Colors.white),
-                      onPressed: () {
-                        if (!voiceController.isInitialized) {
-                          if (kDebugMode) {
-                            print('Please wait, initializing speech recognition.');
-                          }
-                        } else {
-                          voiceController.toggleListening((text) {
-                            setState(() {
-                              _text = text;
-                              if (text.isNotEmpty) {
-                                final message = ChatMessage(
-                                  text: text,
-                                  user: ChatUserModel.currentUser,
-                                  createdAt: DateTime.now(),
-                                );
-                                controller.handleMessageSend(message, updateState, context);
+            child: Stack(
+              children: [
+                DashChat(
+                  currentUser: ChatUserModel.currentUser,
+                  typingUsers: ChatMessageModel.typingUsers,
+                  messageOptions: const MessageOptions(
+                    currentUserContainerColor: Colors.black,
+                    containerColor: Color.fromRGBO(139, 0, 0, 1),
+                    textColor: Colors.white,
+                  ),
+                  inputOptions: InputOptions(
+                    maxInputLength: 200,
+                    inputDecoration: InputDecoration(
+                      hintText: 'Type here or use voice',
+                      suffixIcon: Container(
+                        decoration: BoxDecoration(
+                          color: voiceController.isListening ? Colors.green : Colors.red,
+                          borderRadius: BorderRadius.circular(30),
+                        ),
+                        child: IconButton(
+                          icon: Icon(
+                              voiceController.isListening ? Icons.mic_off : Icons.mic,
+                              color: Colors.white),
+                          onPressed: () {
+                            if (!voiceController.isInitialized) {
+                              if (kDebugMode) {
+                                print('Please wait, initializing speech recognition.');
                               }
-                            });
-                          }, () {
-                            setState(() {});
-                          });
-                        }
-                      },
+                            } else {
+                              voiceController.toggleListening((text) {
+                                setState(() {
+                                  _text = text;
+                                  if (text.isNotEmpty) {
+                                    final message = ChatMessage(
+                                      text: text,
+                                      user: ChatUserModel.currentUser,
+                                      createdAt: DateTime.now(),
+                                    );
+                                    controller.handleMessageSend(message, updateState, context);
+                                  }
+                                });
+                              }, () {
+                                setState(() {});
+                              });
+                            }
+                          },
+                        ),
+                      ),
                     ),
                   ),
+                  onSend: (message) => controller.handleMessageSend(message, updateState, context),
+                  messages: ChatMessageModel.messages,
                 ),
-              ),
-              onSend: (message) => controller.handleMessageSend(message, updateState, context),
-              messages: ChatMessageModel.messages,
+                TTSResponseSpeaker(
+                  messages: ChatMessageModel.messages,
+                  ttsController: ttsController,
+                ),
+              ],
             ),
           ),
           Padding(
