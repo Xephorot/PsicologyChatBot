@@ -1,5 +1,5 @@
 import 'package:chatbot_psicologia/Controllers/TextToSpeech/TtsController.dart';
-import 'package:chatbot_psicologia/Views/TtsResponseSpeaker.dart';
+import 'package:chatbot_psicologia/Views/Widgets/TtsResponseSpeaker.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:dash_chat_2/dash_chat_2.dart';
@@ -7,8 +7,8 @@ import 'package:chatbot_psicologia/Models/ChatUserModel.dart';
 import 'package:chatbot_psicologia/Models/ChatModel.dart';
 import 'package:chatbot_psicologia/Controllers/Chat/ChatPageController.dart';
 import 'package:chatbot_psicologia/Controllers/Chat/VoiceController.dart';
-import 'package:chatbot_psicologia/Views/MenuLateral.dart';
-import 'package:chatbot_psicologia/Views/StressLevelIndicator.dart';
+import 'package:chatbot_psicologia/Views/Widgets/MenuLateral.dart';
+import 'package:chatbot_psicologia/Views/Widgets/StressLevelIndicator.dart';
 
 class ChatPage extends StatefulWidget {
   const ChatPage({super.key});

@@ -10,7 +10,7 @@ class TTSController {
 
   void _initializeTts() async {
     await flutterTts.setLanguage("es-ES");
-    await flutterTts.setSpeechRate(0.4);
+    await flutterTts.setSpeechRate(0.4);    
   }
 
   void toggleTts() {
