@@ -8,10 +8,10 @@ class TTSResponseSpeaker extends StatefulWidget {
   final TTSController ttsController;
 
   const TTSResponseSpeaker({
-    Key? key,
+    super.key,
     required this.messages,
     required this.ttsController,
-  }) : super(key: key);
+  });
 
   @override
   _TTSResponseSpeakerState createState() => _TTSResponseSpeakerState();
