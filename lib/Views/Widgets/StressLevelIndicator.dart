@@ -12,10 +12,10 @@ class StressLevelIndicator extends StatelessWidget {
       percentage: stressLevel,
       lineHeight: 20,
       alignment: MainAxisAlignment.spaceBetween,
-      leading: const Icon(Icons.sentiment_satisfied, color: Colors.green),
-      trailing: const Icon(Icons.sentiment_dissatisfied, color: Colors.red),
+      leading: const Icon(Icons.sentiment_satisfied, color: Colors.white),
+      trailing: const Icon(Icons.sentiment_dissatisfied, color: Colors.white),
       backgroundColor: Colors.black12,
-      progressBarColor: GFColors.DANGER,
+      progressBarColor: GFColors.INFO,
     );
   }
 }

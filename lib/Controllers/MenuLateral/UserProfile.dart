@@ -16,7 +16,7 @@ class UserProfile extends StatelessWidget {
               child: FlutterLogo(size: 45.0),
             ),
             decoration: const BoxDecoration(
-              color: Color.fromRGBO(139, 0, 0, 1),
+              color: Color.fromARGB(255, 0, 150, 20),
             ),
           ),
         );
