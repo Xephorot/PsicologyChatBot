@@ -67,7 +67,7 @@ class _ChatPageState extends State<ChatPage> {
                   currentUser: ChatUserModel.currentUser,
                   typingUsers: ChatMessageModel.typingUsers,
                   messageOptions: const MessageOptions(
-                    currentUserContainerColor: Colors.black,
+                    currentUserContainerColor: Color.fromARGB(255, 50, 50, 50),
                     containerColor: Color.fromARGB(255, 32, 160, 36),
                     textColor: Colors.white,
                   ),
