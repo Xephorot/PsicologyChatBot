@@ -1,18 +1,22 @@
 import 'package:chatbot_psicologia/Views/ChatPage.dart';
 import 'package:flutter/material.dart';
 
-void main() => runApp(PsicoApp());
+void main() => runApp(const PsicoApp());
 
 class PsicoApp extends StatelessWidget {
+  const PsicoApp({super.key});
+
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return const MaterialApp(
       home: WelcomeScreen(),
     );
   }
 }
 
 class WelcomeScreen extends StatelessWidget {
+  const WelcomeScreen({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -24,7 +28,7 @@ class WelcomeScreen extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: <Widget>[
-              Text(
+              const Text(
                 'PsicoApp',
                 style: TextStyle(
                   fontSize: 40.0,
@@ -33,7 +37,7 @@ class WelcomeScreen extends StatelessWidget {
                 ),
                 textAlign: TextAlign.center,
               ),
-              SizedBox(height: 20.0),
+              const SizedBox(height: 20.0),
               Text(
                 'Bienvenido',
                 style: TextStyle(
@@ -43,22 +47,22 @@ class WelcomeScreen extends StatelessWidget {
                 ),
                 textAlign: TextAlign.center,
               ),
-              SizedBox(height: 40.0),
+              const SizedBox(height: 40.0),
               ElevatedButton(
                 onPressed: () {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => ChatPage()),
+                    MaterialPageRoute(builder: (context) => const ChatPage()),
                   );
                 },
                 style: ElevatedButton.styleFrom(
                   backgroundColor: Colors.green, 
-                  padding: EdgeInsets.symmetric(horizontal: 50.0, vertical: 20.0),
+                  padding: const EdgeInsets.symmetric(horizontal: 50.0, vertical: 20.0),
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(10.0),
                   ),
                 ),
-                child: Text(
+                child: const Text(
                   'Inicio',
                   style: TextStyle(
                     fontSize: 18.0,
@@ -73,27 +77,3 @@ class WelcomeScreen extends StatelessWidget {
     );
   }
 }
-
-/*class ChatScreen extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('Chat Screen'),
-        backgroundColor: Colors.green,
-      ),
-      body: Center(
-        child: Text(
-          'Bienvenido al chat',
-          style: TextStyle(
-            fontSize: 24.0,
-            color: Colors.green[700],
-          ),
-        ),
-      ),
-    );
-  }
-}
-
-
-*/
