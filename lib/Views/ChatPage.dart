@@ -74,7 +74,6 @@ class _ChatPageState extends State<ChatPage> {
                   inputOptions: InputOptions(
                     maxInputLength: 200,
                     inputDecoration: InputDecoration(
-                      hintText: 'Escribe aqui...',
                       suffixIcon: Container(
                         decoration: BoxDecoration(
                           color: voiceController.isListening ? Colors.greenAccent : Colors.green,

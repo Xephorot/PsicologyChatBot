@@ -75,7 +75,7 @@ class ProfileEditDialog extends StatelessWidget {
               ProfileEditor.instance.saveProfile(_usernameController.text);
               Navigator.of(context).pop();
             },
-            child: const Text('Guardar Cambios'),
+            child: const Text('GUARDAR CAMBIOS'),
           ),
         ],
       ),
