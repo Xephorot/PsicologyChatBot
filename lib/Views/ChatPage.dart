@@ -68,7 +68,7 @@ class _ChatPageState extends State<ChatPage> {
                   typingUsers: ChatMessageModel.typingUsers,
                   messageOptions: const MessageOptions(
                     currentUserContainerColor: Color.fromARGB(255, 57, 122, 60),
-                    containerColor: Colors.lightGreen,
+                    containerColor: Colors.green,
                     textColor: Colors.white,
                   ),
                   inputOptions: InputOptions(
@@ -77,7 +77,7 @@ class _ChatPageState extends State<ChatPage> {
                       hintText: 'Escribe aqui...',
                       suffixIcon: Container(
                         decoration: BoxDecoration(
-                          color: voiceController.isListening ? Color.fromARGB(255, 179, 216, 14) : Colors.greenAccent,
+                          color: voiceController.isListening ? Colors.greenAccent : Colors.green,
                           borderRadius: BorderRadius.circular(30),
                         ),
                         child: IconButton(
