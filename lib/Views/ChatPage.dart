@@ -41,7 +41,7 @@ class _ChatPageState extends State<ChatPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Color.fromARGB(255, 0, 150, 20),
+        backgroundColor: Colors.green,
         title: Center(
           child: StressLevelIndicator(stressLevel: model.stressLevelPercentage),
         ),
@@ -67,8 +67,8 @@ class _ChatPageState extends State<ChatPage> {
                   currentUser: ChatUserModel.currentUser,
                   typingUsers: ChatMessageModel.typingUsers,
                   messageOptions: const MessageOptions(
-                    currentUserContainerColor: Color.fromARGB(255, 50, 50, 50),
-                    containerColor: Color.fromARGB(255, 32, 160, 36),
+                    currentUserContainerColor: Color.fromARGB(255, 57, 122, 60),
+                    containerColor: Colors.lightGreen,
                     textColor: Colors.white,
                   ),
                   inputOptions: InputOptions(
@@ -77,7 +77,7 @@ class _ChatPageState extends State<ChatPage> {
                       hintText: 'Escribe aqui...',
                       suffixIcon: Container(
                         decoration: BoxDecoration(
-                          color: voiceController.isListening ? Color.fromARGB(255, 179, 216, 14) : Color.fromARGB(255, 0, 150, 20),
+                          color: voiceController.isListening ? Color.fromARGB(255, 179, 216, 14) : Colors.greenAccent,
                           borderRadius: BorderRadius.circular(30),
                         ),
                         child: IconButton(
