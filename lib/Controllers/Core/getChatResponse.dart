@@ -51,7 +51,7 @@ Future<void> getChatResponse(
           } else if (responseText.contains("Alto")) {
             updateStressLevel(0.9);
           }
-          responseText = responseText.replaceAll(RegExp(r'\(Nivel de estrés: (Bajo|Medio|Alto)\)'), '').trim();
+          responseText = responseText.replaceAll(RegExp(r'\(Nivel de estrés: (Bajo|Medio|Alto|Desconocido)\)'), '').trim();
           ChatMessageModel.messages.insert(
             0,
             ChatMessage(
