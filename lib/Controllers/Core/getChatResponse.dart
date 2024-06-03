@@ -44,6 +44,15 @@ Future<void> getChatResponse(
       for (var element in response.choices) {
         if (element.message != null) {
           String responseText = element.message!.content;
+          if (responseText.contains("Bajo")) {
+            updateStressLevel(0.1);
+          } else if (responseText.contains("Medio")) {
+            updateStressLevel(0.5);
+          } else if (responseText.contains("Alto")) {
+            updateStressLevel(0.9);
+          }
+          
+          responseText = responseText.replaceAll(RegExp(r'\(Nivel de estrés: (Bajo|Medio|Alto)\)'), '').trim();
           ChatMessageModel.messages.insert(
             0,
             ChatMessage(
@@ -56,13 +65,6 @@ Future<void> getChatResponse(
             WidgetsBinding.instance.addPostFrameCallback((_) {
               ttsController.speak(responseText);
             });
-          }
-          if (responseText.contains("Bajo")) {
-            updateStressLevel(0.1);
-          } else if (responseText.contains("Medio")) {
-            updateStressLevel(0.5);
-          } else if (responseText.contains("Alto")) {
-            updateStressLevel(0.9);
           }
         }
       }
