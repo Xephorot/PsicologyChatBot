@@ -1,3 +1,4 @@
+import 'package:chatbot_psicologia/Views/Widgets/Start/Animations/LiquidAnimation.dart';
 import 'package:chatbot_psicologia/Views/Widgets/Start/AppTitle.dart';
 import 'package:chatbot_psicologia/Views/Widgets/Start/StartButton.dart';
 import 'package:chatbot_psicologia/Views/Widgets/Start/WelcomMessage.dart';
@@ -10,21 +11,26 @@ class WelcomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.green[50],
-      body: const Center(
-        child: Padding(
-          padding: EdgeInsets.symmetric(horizontal: 24.0),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: <Widget>[
-              AppTitle(),
-              SizedBox(height: 20.0),
-              WelcomeMessage(),
-              SizedBox(height: 40.0),
-              StartButton(),
-            ],
+      body: const Stack(
+        children: <Widget>[
+          LiquidAnimation(),
+          Center(
+            child: Padding(
+              padding: EdgeInsets.symmetric(horizontal: 24.0),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: <Widget>[
+                  AppTitle(),
+                  SizedBox(height: 20.0),
+                  WelcomeMessage(),
+                  SizedBox(height: 40.0),
+                  StartButton(),
+                ],
+              ),
+            ),
           ),
-        ),
+        ],
       ),
     );
   }

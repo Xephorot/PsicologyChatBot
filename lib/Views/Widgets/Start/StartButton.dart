@@ -20,7 +20,7 @@ class StartButton extends StatelessWidget {
         ),
       ),
       child: const Text(
-        'Inicio',
+        'INICIO',
         style: TextStyle(
           fontSize: 18.0,
           color: Colors.white,
