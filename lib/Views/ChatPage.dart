@@ -10,6 +10,7 @@ import 'package:chatbot_psicologia/Controllers/Chat/VoiceController.dart';
 import 'package:chatbot_psicologia/Views/Widgets/MenuLateral.dart';
 import 'package:chatbot_psicologia/Views/Widgets/StressLevelIndicator.dart';
 
+//TODO: Limpiar este codigo
 class ChatPage extends StatefulWidget {
   const ChatPage({super.key});
 
