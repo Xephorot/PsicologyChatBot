@@ -1,4 +1,4 @@
-import 'package:chatbot_psicologia/Start.dart';
+import 'package:chatbot_psicologia/Views/Start.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 void main() async {
