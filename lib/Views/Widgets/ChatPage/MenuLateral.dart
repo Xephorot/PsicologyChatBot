@@ -1,3 +1,4 @@
+import 'package:chatbot_psicologia/Controllers/MenuLateral/ChangeAPIKeyTile.dart';
 import 'package:chatbot_psicologia/Controllers/MenuLateral/NewChatTile.dart';
 import 'package:chatbot_psicologia/Controllers/MenuLateral/UserProfile.dart';
 import 'package:flutter/material.dart';
@@ -14,6 +15,7 @@ class MenuLateral extends StatelessWidget {
         children: const <Widget>[
           UserProfile(),
           NewChatTile(),
+          ChangeApiKeyTile(),
         ],
       ),
     );
