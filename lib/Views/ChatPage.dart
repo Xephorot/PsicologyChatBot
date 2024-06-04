@@ -1,4 +1,3 @@
-import 'package:chatbot_psicologia/Clients/OpenAIClient.dart';
 import 'package:chatbot_psicologia/Controllers/TextToSpeech/TtsController.dart';
 import 'package:chatbot_psicologia/Views/Widgets/ChatPage/TtsResponseSpeaker.dart';
 import 'package:flutter/foundation.dart';
@@ -10,8 +9,8 @@ import 'package:chatbot_psicologia/Controllers/Chat/ChatPageController.dart';
 import 'package:chatbot_psicologia/Controllers/Chat/VoiceController.dart';
 import 'package:chatbot_psicologia/Views/Widgets/ChatPage/MenuLateral.dart';
 import 'package:chatbot_psicologia/Views/Widgets/ChatPage/StressLevelIndicator.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
+//TODO: Limpiar Codigo
 class ChatPage extends StatefulWidget {
   const ChatPage({super.key});
 
@@ -33,52 +32,10 @@ class _ChatPageState extends State<ChatPage> {
     voiceController = VoiceController();
     ttsController = TTSController();
     voiceController.initialize();
-
-    _checkApiKey();
   }
 
   void updateState() {
     setState(() {});
-  }
-
-  Future<void> _checkApiKey() async {
-    final SharedPreferences prefs = await SharedPreferences.getInstance();
-    final apiKey = prefs.getString('OPENAI_API_KEY');
-    if (apiKey == null || apiKey.isEmpty) {
-      _showApiKeyDialog();
-    } else {
-      await OpenAIClient.initialize();
-    }
-  }
-
-  Future<void> _showApiKeyDialog() async {
-    final TextEditingController controller = TextEditingController();
-    final SharedPreferences prefs = await SharedPreferences.getInstance();
-
-    await showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        return AlertDialog(
-          title: Text('Ingresar API Key'),
-          content: TextField(
-            controller: controller,
-            decoration: InputDecoration(hintText: 'Ingrese nueva API Key'),
-          ),
-          actions: <Widget>[
-            TextButton(
-              child: Text('Guardar'),
-              onPressed: () async {
-                final newApiKey = controller.text;
-                await prefs.setString('OPENAI_API_KEY', newApiKey);
-                await OpenAIClient.setApiKey(newApiKey);
-                Navigator.of(context).pop();
-                await OpenAIClient.initialize();
-              },
-            ),
-          ],
-        );
-      },
-    );
   }
 
   @override

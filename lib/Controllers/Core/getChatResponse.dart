@@ -38,7 +38,7 @@ Future<void> getChatResponse(
       temperature: 0.1,
     );
     final response =
-        await OpenAIClient.openAI.onChatCompletion(request: request);
+        await OpenAIClient.openAI?.onChatCompletion(request: request);
 
     if (response != null && response.choices.isNotEmpty) {
       for (var element in response.choices) {

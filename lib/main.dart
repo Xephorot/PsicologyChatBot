@@ -1,10 +1,8 @@
-import 'package:chatbot_psicologia/Clients/OpenAIClient.dart';
 import 'package:chatbot_psicologia/Views/Start.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await OpenAIClient.initialize();
   await dotenv.load(fileName: ".env");
   runApp(const MainApp());
 }
