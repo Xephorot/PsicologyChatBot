@@ -1,0 +1,39 @@
+name: chatbot_psicologia
+description: "A new Flutter project."
+publish_to: 'none'
+version: 0.1.0
+
+environment:
+  sdk: '>=3.3.0 <4.0.0'
+
+dependencies:
+  flutter:
+    sdk: flutter
+    
+  chat_gpt_sdk: ^3.0.4
+  dash_chat_2: ^0.0.20
+  shared_preferences: ^2.0.15
+  path_provider: ^2.1.2
+  getwidget: ^2.0.4
+  flutter_dotenv: ^5.1.0
+
+  speech_to_text: ^6.3.0
+  flutter_tts: ^3.8.3
+  wave: ^0.2.0
+  flutter_launcher_icons: ^0.13.1
+  
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^3.0.0
+flutter_launcher_icons:
+    android: true
+    ios: true
+    image_path: "android/assets/images/psicoapp logo.jpg"
+
+  
+
+flutter:
+  uses-material-design: true
+  assets:
+  - .env
