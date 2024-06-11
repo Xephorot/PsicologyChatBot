@@ -1,13 +1,15 @@
-// ignore_for_file: avoid_print
+// VoiceController.dart
 
 import 'package:speech_to_text/speech_to_text.dart' as stt;
+import 'package:chatbot_psicologia/Controllers/TextToSpeech/TtsController.dart';
 
 class VoiceController {
   late stt.SpeechToText _speech;
   bool isListening = false;
   bool isInitialized = false;
+  late TTSController ttsController;
 
-  VoiceController() {
+  VoiceController({required this.ttsController}) {
     _speech = stt.SpeechToText();
   }
 
@@ -17,8 +19,13 @@ class VoiceController {
         onStatus: (status) {
           isListening = status == 'listening';
         },
-        onError: (errorNotification) =>
-            print('Error: $errorNotification.errorMsg'),
+        onError: (errorNotification) {
+          print('Error: ${errorNotification.errorMsg}');
+          if (errorNotification.errorMsg == 'error_no_match') {
+            // Intentar escuchar nuevamente o notificar al usuario
+            print('No match found, please try again.');
+          }
+        },
       );
       if (!isInitialized) {
         print(
@@ -29,21 +36,27 @@ class VoiceController {
     }
   }
 
-  void toggleListening(
-      Function(String) onResult, Function onListeningChange) async {
+  void toggleListening(Function(String) onResult, Function onListeningChange) async {
     if (isListening) {
       await _speech.stop();
       isListening = false;
     } else {
-      await _speech.listen(
-        onResult: (result) {
-          if (result.finalResult) {
-            onResult(
-                result.recognizedWords);
-          }
-        },
-      );
-      isListening = true;
+      // Detener TTS cuando se empieza a escuchar
+      await ttsController.stop();
+      try {
+        await _speech.listen(
+          onResult: (result) {
+            if (result.finalResult) {
+              onResult(result.recognizedWords);
+            }
+          },
+          listenFor: Duration(seconds: 10), 
+          pauseFor: Duration(seconds: 5), 
+        );
+        isListening = true;
+      } catch (e) {
+        print('Error starting speech recognition: $e');
+      }
     }
     onListeningChange();
   }

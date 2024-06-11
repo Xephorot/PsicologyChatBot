@@ -11,6 +11,7 @@ import 'package:chatbot_psicologia/Views/Widgets/ChatPage/MenuLateral.dart';
 import 'package:chatbot_psicologia/Views/Widgets/ChatPage/StressLevelIndicator.dart';
 
 //TODO: Limpiar Codigo
+
 class ChatPage extends StatefulWidget {
   const ChatPage({super.key});
 
@@ -29,8 +30,8 @@ class _ChatPageState extends State<ChatPage> {
   void initState() {
     super.initState();
     controller = ChatController(model);
-    voiceController = VoiceController();
     ttsController = TTSController();
+    voiceController = VoiceController(ttsController: ttsController);  // Pasar ttsController
     voiceController.initialize();
   }
 
