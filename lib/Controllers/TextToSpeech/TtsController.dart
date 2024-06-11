@@ -10,11 +10,14 @@ class TTSController {
 
   void _initializeTts() async {
     await flutterTts.setLanguage("es-ES");
-    await flutterTts.setSpeechRate(0.4);    
+    await flutterTts.setSpeechRate(0.4);
   }
 
-  void toggleTts() {
+  void toggleTts() async {
     isTtsEnabled = !isTtsEnabled;
+    if (!isTtsEnabled) {
+      await stop();
+    }
   }
 
   Future<void> speak(String text) async {

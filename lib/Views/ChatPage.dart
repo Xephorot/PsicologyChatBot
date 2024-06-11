@@ -31,7 +31,7 @@ class _ChatPageState extends State<ChatPage> {
     super.initState();
     controller = ChatController(model);
     ttsController = TTSController();
-    voiceController = VoiceController(ttsController: ttsController);  // Pasar ttsController
+    voiceController = VoiceController(ttsController: ttsController);
     voiceController.initialize();
   }
 

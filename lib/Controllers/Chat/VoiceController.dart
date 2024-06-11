@@ -1,5 +1,7 @@
 // VoiceController.dart
 
+// ignore_for_file: avoid_print
+
 import 'package:speech_to_text/speech_to_text.dart' as stt;
 import 'package:chatbot_psicologia/Controllers/TextToSpeech/TtsController.dart';
 
@@ -22,7 +24,6 @@ class VoiceController {
         onError: (errorNotification) {
           print('Error: ${errorNotification.errorMsg}');
           if (errorNotification.errorMsg == 'error_no_match') {
-            // Intentar escuchar nuevamente o notificar al usuario
             print('No match found, please try again.');
           }
         },
@@ -41,7 +42,6 @@ class VoiceController {
       await _speech.stop();
       isListening = false;
     } else {
-      // Detener TTS cuando se empieza a escuchar
       await ttsController.stop();
       try {
         await _speech.listen(
@@ -50,8 +50,6 @@ class VoiceController {
               onResult(result.recognizedWords);
             }
           },
-          listenFor: Duration(seconds: 10), 
-          pauseFor: Duration(seconds: 5), 
         );
         isListening = true;
       } catch (e) {
