@@ -31,9 +31,9 @@ flutter_launcher_icons:
     ios: true
     image_path: "android/assets/images/psicoapp logo.jpg"
 
-  
-
 flutter:
   uses-material-design: true
   assets:
   - .env
+  - android/assets/images/psicoapp logo.jpg
+
